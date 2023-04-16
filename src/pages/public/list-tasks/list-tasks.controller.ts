@@ -4,6 +4,7 @@ import { StorageProvider } from "../../../app/providers/storage.provider";
 import { useTasks } from "../../../app/contexts/tasks/use-tasks.hook";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import { Task } from "../../../app/contexts/tasks/types";
 
 function useListTasksController() {
   const { state: tasksState, addTask } = useTasks();
@@ -13,7 +14,7 @@ function useListTasksController() {
       title: string;
       description: string;
       status: number;
-    }): Promise<void> => {
+    }): Promise<Task> => {
       const newTaskId = uuidv4();
 
       const now = dayjs().format("YYYY-MM-DD HH:mm:ss");
@@ -26,6 +27,8 @@ function useListTasksController() {
       };
 
       addTask(newTask);
+
+      return newTask;
     },
     [tasksState]
   );

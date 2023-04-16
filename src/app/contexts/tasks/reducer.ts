@@ -39,6 +39,12 @@ export const tasksReducer = (
         isLoading: false,
       };
 
+    case TasksContextConstants.HANDLE_IS_LOADING:
+      return {
+        ...prevState,
+        isLoading: action.isLoading,
+      };
+
     default:
       return prevState;
   }

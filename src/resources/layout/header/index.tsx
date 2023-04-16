@@ -1,15 +1,9 @@
+import { Link } from "react-router-dom";
+import { RouteConstants } from "../../../app/constants/route.constants";
 function Header() {
   return (
     <div className="flex justify-start items-center py-5 px-6 bg-blue-chakra text-white">
-      <a className="mx-5" href="http://">
-        WIP
-      </a>
-      <a className="mx-5" href="http://">
-        WIP
-      </a>
-      <a className="mx-5" href="http://">
-        WIP
-      </a>
+      <Link to={RouteConstants.ROOT}>Tasks</Link>
     </div>
   );
 }

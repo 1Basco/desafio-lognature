@@ -23,6 +23,7 @@ export default function ListTasksPage(): JSX.Element {
                   title={task.title}
                   description={task.description}
                   status={task.status}
+                  taskId={task.id}
                 />
               ))
             ) : (

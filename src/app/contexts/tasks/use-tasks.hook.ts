@@ -30,10 +30,17 @@ export function useTasks() {
       tasks.removeTask
   );
 
+  const handleIsLoading: (isLoading: boolean) => void = useContextSelector(
+    TasksContext,
+    (tasks: TasksContextOptions): ((isLoading: boolean) => void) =>
+      tasks.handleIsLoading
+  );
+
   return {
     state,
     addTask,
     updateTask,
     removeTask,
+    handleIsLoading,
   };
 }

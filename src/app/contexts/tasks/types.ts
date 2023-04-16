@@ -3,6 +3,7 @@ export interface TasksContextOptions {
   addTask: (data: Task) => Promise<void>;
   updateTask: (data: Task) => Promise<void>;
   removeTask: (data: Task) => Promise<void>;
+  handleIsLoading: (isLoading: boolean) => void;
 }
 
 export interface TasksProviderOptions {
@@ -41,5 +42,9 @@ export type TasksReducerActionOptions =
   | {
       type: "DELETE_TASK";
       task: Task;
+      isLoading: boolean;
+    }
+  | {
+      type: "HANDLE_IS_LOADING";
       isLoading: boolean;
     };

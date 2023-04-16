@@ -6,10 +6,10 @@ function useTaskController() {
   const storageProvider: StorageProvider = StorageProvider.Instance;
   const toastProvider: ToastProvider = ToastProvider.Instance;
 
-  const onClickCreateTask = useCallback(async () => {}, []);
+  const getTaskById = useCallback(async () => {}, []);
 
   return {
-    onClickCreateTask,
+    getTaskById,
   };
 }
 

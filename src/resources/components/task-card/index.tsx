@@ -1,6 +1,8 @@
 import { Badge, Box } from "@chakra-ui/react";
 import { StatusColors, TaskCardOptions } from "./types";
 import { TaskStatusConstants } from "../../../app/constants/task-status.constants";
+import { useNavigate } from "react-router-dom";
+import { RouteConstants } from "../../../app/constants/route.constants";
 
 const STATUS_COLORS: StatusColors = {
   [TaskStatusConstants.PENDING]: "red",
@@ -12,7 +14,13 @@ export default function TaskCard({
   title,
   description,
   status,
+  taskId,
 }: TaskCardOptions): JSX.Element {
+  const navigate = useNavigate();
+  const handleClick = (taskId: string) => {
+    navigate(`task/${taskId}`);
+  };
+
   return (
     <Box
       borderWidth="1px"
@@ -25,6 +33,7 @@ export default function TaskCard({
       flexDirection="column"
       justifyContent="space-between"
       height="100%"
+      onClick={() => handleClick(taskId)}
     >
       <Box p={4}>
         <Box fontWeight="bold" fontSize="xl">

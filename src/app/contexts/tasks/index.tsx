@@ -96,19 +96,30 @@ export const TasksProvider: React.FC<TasksProviderOptions> = ({
     );
   };
 
+  const handleIsLoading = (isLoading: boolean): void => {
+    dispatch({ type: TasksContextConstants.HANDLE_IS_LOADING, isLoading });
+  };
+
   /**
    * @returns {void}
    */
   useEffect(() => {
     const getSavedTasks = async () => {
+      handleIsLoading(true);
       const savedTasks = await storageProvider.getItem(StorageConstants.TASKS);
 
       if (savedTasks) {
-        dispatch({
-          type: TasksContextConstants.LOAD_TASKS,
-          tasks: savedTasks,
-          isLoading: true,
-        });
+        try {
+          dispatch({
+            type: TasksContextConstants.LOAD_TASKS,
+            tasks: savedTasks,
+            isLoading: true,
+          });
+        } catch (error) {
+          console.error(error);
+        } finally {
+          handleIsLoading(false);
+        }
       }
     };
     getSavedTasks();
@@ -121,6 +132,7 @@ export const TasksProvider: React.FC<TasksProviderOptions> = ({
         addTask,
         updateTask,
         removeTask,
+        handleIsLoading,
       }}
     >
       {children}
