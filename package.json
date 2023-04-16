@@ -1,0 +1,46 @@
+{
+  "name": "desafio-lognature",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.5.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@types/react-helmet": "^6.1.6",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/uuid": "^9.0.1",
+    "dayjs": "^1.11.7",
+    "encrypt-storage": "^2.12.15",
+    "formik": "^2.2.9",
+    "framer-motion": "^10.12.1",
+    "i18n-js": "^4.2.3",
+    "i18next": "^22.4.13",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-i18next": "^12.2.0",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.10.0",
+    "react-toastify": "^9.1.2",
+    "use-context-selector": "^1.4.1",
+    "uuid": "^9.0.0",
+    "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.10",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  }
+}
