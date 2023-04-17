@@ -7,11 +7,6 @@ export function useTasks() {
     TasksContext,
     (tasks: TasksContextOptions) => tasks.state
   );
-  //   const setIsLoading: (isLoading: boolean) => void = useContextSelector(
-  //     TasksContext,
-  //     (tasks: TasksContextOptions): ((isLoading: boolean) => void) =>
-  //       tasks.setIsLoading
-  //   );
   const addTask: (task: Task) => Promise<void> = useContextSelector(
     TasksContext,
     (tasks: TasksContextOptions): ((task: Task) => Promise<void>) =>

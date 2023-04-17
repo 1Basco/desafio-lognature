@@ -8,3 +8,6 @@ export interface TaskCardOptions {
 export interface StatusColors {
   [key: number]: string;
 }
+export interface StatusText {
+  [key: number]: string;
+}

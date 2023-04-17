@@ -7,5 +7,6 @@ export interface TaskFormValues {
 }
 
 export interface TaskFormOptions {
-  onClick: (data: TaskFormValues) => Promise<Task>;
+  onClick: (data: TaskFormValues) => Promise<any>;
+  task?: Task;
 }

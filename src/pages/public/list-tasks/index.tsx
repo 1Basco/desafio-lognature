@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Task } from "../../../app/contexts/tasks/types";
 import { useTasks } from "../../../app/contexts/tasks/use-tasks.hook";
 import { TaskForm } from "../../../resources/components/forms/task";
@@ -9,6 +10,12 @@ export default function ListTasksPage(): JSX.Element {
   const { onClickAddTask } = useListTasksController();
   const { state: stateTasks } = useTasks();
 
+  stateTasks.tasks.forEach((task: Task) => {
+    task.createdAt = dayjs(task.createdAt);
+  });
+
+  // Sort tasks by createdAt
+  stateTasks.tasks.sort((a: any, b: any) => b.createdAt - a.createdAt);
   return (
     <>
       <Helmet title={"Lista de tasks"} />

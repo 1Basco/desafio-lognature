@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { createContext } from "use-context-selector";
+import { StorageConstants } from "../../constants/storage.constants";
 import { StorageProvider } from "../../providers/storage.provider";
 import { TasksContextConstants } from "./constants";
 import { tasksReducer } from "./reducer";
@@ -9,7 +10,6 @@ import {
   TasksProviderOptions,
   TasksReducerOptions,
 } from "./types";
-import { StorageConstants } from "../../constants/storage.constants";
 
 export const TasksContext = createContext<TasksContextOptions>(
   {} as TasksContextOptions
@@ -61,9 +61,10 @@ export const TasksProvider: React.FC<TasksProviderOptions> = ({
 
     const savedTasks = await storageProvider.getItem(StorageConstants.TASKS);
 
-    const tasks = savedTasks ? JSON.parse(savedTasks) : [];
+    const updatedTasks = savedTasks.map((t: Task) =>
+      t.id === task.id ? task : t
+    );
 
-    const updatedTasks = tasks.map((t: Task) => (t.id === task.id ? task : t));
     storageProvider.setItem(
       StorageConstants.TASKS,
       JSON.stringify(updatedTasks)
@@ -121,6 +122,7 @@ export const TasksProvider: React.FC<TasksProviderOptions> = ({
           handleIsLoading(false);
         }
       }
+      handleIsLoading(false);
     };
     getSavedTasks();
   }, []);

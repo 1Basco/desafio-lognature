@@ -15,7 +15,7 @@ export interface Task {
   title: string;
   description: string;
   status: number;
-  createdAt: string;
+  createdAt: any;
 }
 
 export interface TasksReducerOptions {

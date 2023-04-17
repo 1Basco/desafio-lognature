@@ -9,32 +9,52 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { TaskStatusConstants } from "../../../../app/constants/task-status.constants";
 import { TaskYupFormSchema } from "./schema.yup";
 import { TaskFormOptions, TaskFormValues } from "./types";
-import { useNavigate } from "react-router-dom";
-import { Task } from "../../../../app/contexts/tasks/types";
+import { RouteConstants } from "../../../../app/constants/route.constants";
 
-export const TaskForm = ({ onClick }: TaskFormOptions) => {
+export const TaskForm = ({ task, onClick }: TaskFormOptions) => {
   const navigate = useNavigate();
-  const handleNavigation = (taskId: string | undefined) => {
+
+  const handleNavigation = (taskId?: string): void => {
+    if (task) {
+      navigate(RouteConstants.ROOT);
+    }
     if (taskId) {
-      navigate(`task/${taskId}`);
+      navigate(RouteConstants.TASK.replace(":taskId", taskId));
     }
   };
 
   const formik = useFormik<TaskFormValues>({
-    initialValues: { title: "", description: "", status: 0 },
+    initialValues: {
+      title: task?.title ? task.title : "",
+      description: task?.description ? task.description : "",
+      status: task?.status ? task.status : 0,
+    },
     onSubmit: async (values) => {
-      let addedTask;
-      try {
-        addedTask = await onClick(values);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        handleNavigation(addedTask?.id);
-        formik.resetForm();
-        formik.setSubmitting(false);
+      if (task) {
+        try {
+          await onClick(values);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          handleNavigation();
+          formik.resetForm();
+          formik.setSubmitting(false);
+        }
+      } else {
+        let addedTask;
+        try {
+          addedTask = await onClick(values);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          handleNavigation(addedTask?.id);
+          formik.resetForm();
+          formik.setSubmitting(false);
+        }
       }
     },
 
@@ -82,7 +102,7 @@ export const TaskForm = ({ onClick }: TaskFormOptions) => {
           type="submit"
           isLoading={formik.isSubmitting}
         >
-          Create Task
+          {task ? "Update Task" : "Create Task"}
         </Button>
       </form>
     </Card>

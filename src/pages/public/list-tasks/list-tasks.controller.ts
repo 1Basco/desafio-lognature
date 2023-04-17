@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { Task } from "../../../app/contexts/tasks/types";
 
 function useListTasksController() {
+  const toastProvider: ToastProvider = ToastProvider.Instance;
   const { state: tasksState, addTask } = useTasks();
 
   const onClickAddTask = useCallback(
@@ -25,8 +26,13 @@ function useListTasksController() {
         status: data.status,
         createdAt: now,
       };
-
-      addTask(newTask);
+      try {
+        await addTask(newTask);
+        toastProvider.success("Task added successfully");
+      } catch (error: any) {
+        console.error(error);
+        toastProvider.error(error.message);
+      }
 
       return newTask;
     },
