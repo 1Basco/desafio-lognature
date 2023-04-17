@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ToastProvider } from "../../../app/providers/toast.provider";
 import { StorageProvider } from "../../../app/providers/storage.provider";
 import { useTasks } from "../../../app/contexts/tasks/use-tasks.hook";
@@ -9,6 +9,8 @@ import { Task } from "../../../app/contexts/tasks/types";
 function useListTasksController() {
   const toastProvider: ToastProvider = ToastProvider.Instance;
   const { state: tasksState, addTask } = useTasks();
+
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasksState.tasks);
 
   const onClickAddTask = useCallback(
     async (data: {
@@ -36,11 +38,30 @@ function useListTasksController() {
 
       return newTask;
     },
-    [tasksState]
+    [tasksState.tasks]
   );
+
+  const onFilterClick = useCallback(
+    async (filter: string | number): Promise<void> => {
+      if (filter === "all") {
+        setFilteredTasks(tasksState.tasks);
+      } else {
+        setFilteredTasks(
+          tasksState.tasks.filter((task) => task.status == filter)
+        );
+      }
+    },
+    [tasksState.tasks]
+  );
+
+  useEffect(() => {
+    setFilteredTasks(tasksState.tasks);
+  }, [tasksState.tasks]);
 
   return {
     onClickAddTask,
+    onFilterClick,
+    filteredTasks: filteredTasks,
   };
 }
 

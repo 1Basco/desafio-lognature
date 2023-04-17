@@ -1,8 +1,7 @@
+import { Task } from "../../../app/contexts/tasks/types";
+
 export interface TaskCardOptions {
-  title: string;
-  description: string;
-  status: number;
-  taskId: string;
+  task: Task;
 }
 
 export interface StatusColors {
