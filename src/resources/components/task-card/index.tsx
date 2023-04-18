@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TaskStatusConstants } from "../../../app/constants/task-status.constants";
 import { StatusColors, StatusText, TaskCardOptions } from "./types";
 import { RouteConstants } from "../../../app/constants/route.constants";
+import dayjs from "dayjs";
 
 const STATUS_COLORS: StatusColors = {
   [TaskStatusConstants.PENDING]: "red",
@@ -50,6 +51,11 @@ export default function TaskCard({ task }: TaskCardOptions): JSX.Element {
           {task.description.length > 50
             ? `${task.description.slice(0, 50)}...`
             : task.description}
+        </Box>
+        <Box pt={2}>
+          <p className="text-xs">
+            created: {dayjs(task.createdAt).format("DD/MM/YYYY HH:mm")}
+          </p>
         </Box>
       </Box>
       <Box p={4} bg="blue.900" alignSelf="flex-end" width={"100%"}>

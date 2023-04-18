@@ -25,7 +25,7 @@ export default function TaskPage(): JSX.Element {
   return (
     <>
       <Helmet title={translate("app.login")} />
-      <div className="w-full lg:w-4/12 p-4 lg:p-3 mt-4">
+      <div className="w-full lg:w-6/12 p-4 lg:p-3 mt-4  m-auto">
         {task && <TaskForm task={task} onClick={onClickUpdateTask} />}
       </div>
     </>

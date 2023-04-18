@@ -4,9 +4,12 @@ import { RouteConstants } from "../../../app/constants/route.constants";
 import { Task } from "../../../app/contexts/tasks/types";
 import { useTasks } from "../../../app/contexts/tasks/use-tasks.hook";
 import { ToastProvider } from "../../../app/providers/toast.provider";
+import { StorageProvider } from "../../../app/providers/storage.provider";
+import { StorageConstants } from "../../../app/constants/storage.constants";
 
 function useTaskController() {
   const toastProvider: ToastProvider = ToastProvider.Instance;
+  const storageProvider: StorageProvider = StorageProvider.Instance;
   const navigate = useNavigate();
 
   const { state: tasksState, updateTask, handleIsLoading } = useTasks();
@@ -20,7 +23,10 @@ function useTaskController() {
     async (taskId: string): Promise<void> => {
       let taskData;
       try {
-        taskData = tasksState.tasks.find((task: Task) => task.id === taskId);
+        const savedTasks = await storageProvider.getItem(
+          StorageConstants.TASKS
+        );
+        taskData = savedTasks.find((task: Task) => task.id === taskId);
         if (taskData) {
           setTask(taskData);
         } else {

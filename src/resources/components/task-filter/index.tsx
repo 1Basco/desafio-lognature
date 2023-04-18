@@ -1,9 +1,9 @@
+import { Button, Wrap, WrapItem } from "@chakra-ui/react";
 import { useState } from "react";
-import { ButtonGroup, Button, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { BsFillCalendarCheckFill } from "react-icons/bs";
+import { GiPlayerTime } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi";
 import { RiTodoFill } from "react-icons/ri";
-import { GiPlayerTime } from "react-icons/gi";
-import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { TaskStatusConstants } from "../../../app/constants/task-status.constants";
 
 interface TaskFilterOptions {
@@ -30,6 +30,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             All
           </Button>
         </WrapItem>
+
         <WrapItem>
           <Button
             isActive={activeFilter === TaskStatusConstants.PENDING}
@@ -39,6 +40,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             To Do
           </Button>
         </WrapItem>
+
         <WrapItem>
           <Button
             isActive={activeFilter === TaskStatusConstants.IN_PROGRESS}
@@ -48,6 +50,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             In Progress
           </Button>
         </WrapItem>
+
         <WrapItem>
           <Button
             isActive={activeFilter === TaskStatusConstants.COMPLETED}
