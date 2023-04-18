@@ -7,7 +7,7 @@ import TaskFilter from "../../../resources/components/task-filter";
 import useListTasksController from "./list-tasks.controller";
 
 export default function ListTasksPage(): JSX.Element {
-  const { onClickAddTask, onFilterClick, filteredTasks } =
+  const { onClickAddTask, onFilterClick, filteredTasks, onClickDeleteTask } =
     useListTasksController();
 
   filteredTasks.forEach((task: Task) => {
@@ -27,7 +27,11 @@ export default function ListTasksPage(): JSX.Element {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
             {filteredTasks ? (
               filteredTasks.map((task: Task) => (
-                <TaskCard key={task.id} task={task} />
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onClickDeleteTask={onClickDeleteTask}
+                />
               ))
             ) : (
               <></>

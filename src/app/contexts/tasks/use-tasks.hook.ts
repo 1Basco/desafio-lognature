@@ -19,9 +19,9 @@ export function useTasks() {
       tasks.updateTask
   );
 
-  const removeTask: (task: Task) => Promise<void> = useContextSelector(
+  const removeTask: (taskId: string) => Promise<void> = useContextSelector(
     TasksContext,
-    (tasks: TasksContextOptions): ((task: Task) => Promise<void>) =>
+    (tasks: TasksContextOptions): ((taskId: string) => Promise<void>) =>
       tasks.removeTask
   );
 

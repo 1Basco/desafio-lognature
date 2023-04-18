@@ -4,6 +4,7 @@ import { TaskStatusConstants } from "../../../app/constants/task-status.constant
 import { StatusColors, StatusText, TaskCardOptions } from "./types";
 import { RouteConstants } from "../../../app/constants/route.constants";
 import dayjs from "dayjs";
+import ToggleButton from "../buttons/toggle";
 
 const STATUS_COLORS: StatusColors = {
   [TaskStatusConstants.PENDING]: "red",
@@ -16,7 +17,10 @@ const STATUS_TEXT: StatusText = {
   [TaskStatusConstants.COMPLETED]: "Completed",
 };
 
-export default function TaskCard({ task }: TaskCardOptions): JSX.Element {
+export default function TaskCard({
+  task,
+  onClickDeleteTask,
+}: TaskCardOptions): JSX.Element {
   const navigate = useNavigate();
   const handleClick = (taskId: string) => {
     navigate(RouteConstants.TASK.replace(":taskId", taskId));
@@ -34,14 +38,19 @@ export default function TaskCard({ task }: TaskCardOptions): JSX.Element {
       flexDirection="column"
       justifyContent="space-between"
       height="100%"
-      onClick={() => handleClick(task.id)}
       _hover={{
         bg: STATUS_COLORS[task.status],
         transition: "background-color 3s",
       }}
       transition="background-color 1s"
     >
-      <Box p={4}>
+      <Box
+        p={4}
+        onClick={() => handleClick(task.id)}
+        _hover={{
+          cursor: "pointer",
+        }}
+      >
         <Box fontWeight="bold" fontSize="xl">
           {task.title.length > 50
             ? `${task.title.slice(0, 50)}...`
@@ -58,10 +67,23 @@ export default function TaskCard({ task }: TaskCardOptions): JSX.Element {
           </p>
         </Box>
       </Box>
-      <Box p={4} bg="blue.900" alignSelf="flex-end" width={"100%"}>
-        <Badge bg={STATUS_COLORS[task.status]} textColor={"#212121"}>
+      <Box
+        p={4}
+        bg="blue.900"
+        alignSelf="flex-end"
+        width={"100%"}
+        display={"flex"}
+        justifyContent={"space-between"}
+        justifyItems={"center"}
+      >
+        <Badge
+          bg={STATUS_COLORS[task.status]}
+          textColor={"#212121"}
+          alignSelf={"center"}
+        >
           {STATUS_TEXT[task.status]}
         </Badge>
+        <ToggleButton onClick={() => onClickDeleteTask(task.id)} />
       </Box>
     </Box>
   );

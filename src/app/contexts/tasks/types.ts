@@ -2,7 +2,7 @@ export interface TasksContextOptions {
   state: TasksReducerOptions;
   addTask: (data: Task) => Promise<void>;
   updateTask: (data: Task) => Promise<void>;
-  removeTask: (data: Task) => Promise<void>;
+  removeTask: (taskId: string) => Promise<void>;
   handleIsLoading: (isLoading: boolean) => void;
 }
 
@@ -41,7 +41,7 @@ export type TasksReducerActionOptions =
     }
   | {
       type: "DELETE_TASK";
-      task: Task;
+      taskId: string;
       isLoading: boolean;
     }
   | {

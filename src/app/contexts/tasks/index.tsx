@@ -78,18 +78,18 @@ export const TasksProvider: React.FC<TasksProviderOptions> = ({
    * @param {Task} task - The task to update.
    * @return {Promise<void>} This function does not return anything.
    */
-  const removeTask = async (task: Task): Promise<void> => {
+  const removeTask = async (taskId: string): Promise<void> => {
     dispatch({
       type: TasksContextConstants.DELETE_TASK,
-      task,
+      taskId: taskId,
       isLoading: true,
     });
 
     const savedTasks = await storageProvider.getItem(StorageConstants.TASKS);
 
-    const tasks = savedTasks ? JSON.parse(savedTasks) : [];
+    const tasks = savedTasks ? savedTasks : [];
 
-    const updatedTasks = tasks.filter((t: Task) => t.id !== task.id);
+    const updatedTasks = tasks.filter((t: Task) => t.id !== taskId);
 
     await storageProvider.setItem(
       StorageConstants.TASKS,

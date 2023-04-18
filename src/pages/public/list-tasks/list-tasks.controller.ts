@@ -8,7 +8,12 @@ import { Task } from "../../../app/contexts/tasks/types";
 
 function useListTasksController() {
   const toastProvider: ToastProvider = ToastProvider.Instance;
-  const { state: tasksState, addTask } = useTasks();
+  const {
+    state: tasksState,
+    addTask,
+    handleIsLoading,
+    removeTask,
+  } = useTasks();
 
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasksState.tasks);
 
@@ -54,6 +59,20 @@ function useListTasksController() {
     [tasksState.tasks]
   );
 
+  const onClickDeleteTask = useCallback(
+    async (taskId: string) => {
+      handleIsLoading(true);
+      try {
+        await removeTask(taskId);
+      } catch (error: any) {
+        console.error(error);
+      } finally {
+        handleIsLoading(false);
+      }
+    },
+    [tasksState.tasks]
+  );
+
   useEffect(() => {
     setFilteredTasks(tasksState.tasks);
   }, [tasksState.tasks]);
@@ -61,6 +80,7 @@ function useListTasksController() {
   return {
     onClickAddTask,
     onFilterClick,
+    onClickDeleteTask,
     filteredTasks: filteredTasks,
   };
 }

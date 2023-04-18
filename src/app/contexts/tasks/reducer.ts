@@ -35,7 +35,7 @@ export const tasksReducer = (
     case TasksContextConstants.DELETE_TASK:
       return {
         ...prevState,
-        tasks: prevState.tasks.filter((task) => task.id !== action.task.id),
+        tasks: prevState.tasks.filter((task) => task.id !== action.taskId),
         isLoading: false,
       };
 
