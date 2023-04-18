@@ -1,5 +1,5 @@
-import { ButtonTypeConstants } from "@/app/constants/button-type.constants";
-import { translate } from "@/configuration/i18n.configuration";
+import { ButtonTypeConstants } from "../../../../app/constants/button-type.constants";
+import { translate } from "../../../../configuration/i18n.configuration";
 
 interface PrimaryButtonOptions {
   title?: string;
