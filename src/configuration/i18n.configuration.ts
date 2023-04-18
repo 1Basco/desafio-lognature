@@ -53,3 +53,9 @@ i18n.use(initReactI18next).init({
 });
 
 export const translate = (key: any) => i18n.t(key);
+
+export const translateReplace = (
+  key: string,
+  searchValue: string,
+  replaceValue: string
+): string => translate(key).replace(searchValue, replaceValue);

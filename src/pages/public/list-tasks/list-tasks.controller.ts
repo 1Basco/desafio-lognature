@@ -5,6 +5,7 @@ import { useTasks } from "../../../app/contexts/tasks/use-tasks.hook";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import { Task } from "../../../app/contexts/tasks/types";
+import { translate } from "../../../configuration/i18n.configuration";
 
 function useListTasksController() {
   const toastProvider: ToastProvider = ToastProvider.Instance;
@@ -35,7 +36,7 @@ function useListTasksController() {
       };
       try {
         await addTask(newTask);
-        toastProvider.success("Task added successfully");
+        toastProvider.success(translate("common.task_added_successfully"));
       } catch (error: any) {
         console.error(error);
         toastProvider.error(error.message);
@@ -64,6 +65,7 @@ function useListTasksController() {
       handleIsLoading(true);
       try {
         await removeTask(taskId);
+        toastProvider.success(translate("common.task_deleted_successfully"));
       } catch (error: any) {
         console.error(error);
       } finally {

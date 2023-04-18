@@ -5,6 +5,7 @@ import { StatusColors, StatusText, TaskCardOptions } from "./types";
 import { RouteConstants } from "../../../app/constants/route.constants";
 import dayjs from "dayjs";
 import ToggleButton from "../buttons/toggle";
+import { translate } from "../../../configuration/i18n.configuration";
 
 const STATUS_COLORS: StatusColors = {
   [TaskStatusConstants.PENDING]: "red",
@@ -63,7 +64,8 @@ export default function TaskCard({
         </Box>
         <Box pt={2}>
           <p className="text-xs">
-            created: {dayjs(task.createdAt).format("DD/MM/YYYY HH:mm")}
+            {translate("task.createdAt")}{" "}
+            {dayjs(task.createdAt).format("DD/MM/YYYY HH:mm")}
           </p>
         </Box>
       </Box>

@@ -5,6 +5,7 @@ import Helmet from "../../../resources/components/helmet";
 import TaskCard from "../../../resources/components/task-card";
 import TaskFilter from "../../../resources/components/task-filter";
 import useListTasksController from "./list-tasks.controller";
+import { translate } from "../../../configuration/i18n.configuration";
 
 export default function ListTasksPage(): JSX.Element {
   const { onClickAddTask, onFilterClick, filteredTasks, onClickDeleteTask } =
@@ -18,7 +19,7 @@ export default function ListTasksPage(): JSX.Element {
 
   return (
     <>
-      <Helmet title={"Lista de tasks"} />
+      <Helmet title={translate("app.tasks")} />
 
       <TaskFilter onFilter={onFilterClick} />
 

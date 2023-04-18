@@ -5,6 +5,7 @@ import { GiPlayerTime } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi";
 import { RiTodoFill } from "react-icons/ri";
 import { TaskStatusConstants } from "../../../app/constants/task-status.constants";
+import { translate } from "../../../configuration/i18n.configuration";
 
 interface TaskFilterOptions {
   onFilter: (filter: string | number) => void;
@@ -19,7 +20,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
 
   return (
     <div className="py-4 px-7">
-      <h3 className="mr-4">Filters</h3>
+      <h3 className="mr-4">{translate("heading.filters")}</h3>
       <Wrap spacing={4}>
         <WrapItem>
           <Button
@@ -27,7 +28,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             onClick={() => handleClick("all")}
             leftIcon={<HiUserGroup />}
           >
-            All
+            {translate("heading.all")}
           </Button>
         </WrapItem>
 
@@ -37,7 +38,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             onClick={() => handleClick(TaskStatusConstants.PENDING)}
             leftIcon={<RiTodoFill />}
           >
-            To Do
+            {translate("heading.to_do")}
           </Button>
         </WrapItem>
 
@@ -47,7 +48,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             onClick={() => handleClick(TaskStatusConstants.IN_PROGRESS)}
             leftIcon={<GiPlayerTime />}
           >
-            In Progress
+            {translate("heading.in_progress")}
           </Button>
         </WrapItem>
 
@@ -57,7 +58,7 @@ const TaskFilter = ({ onFilter }: TaskFilterOptions) => {
             onClick={() => handleClick(TaskStatusConstants.COMPLETED)}
             leftIcon={<BsFillCalendarCheckFill />}
           >
-            Completed
+            {translate("heading.finished")}
           </Button>
         </WrapItem>
       </Wrap>

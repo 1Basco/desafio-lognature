@@ -3,7 +3,7 @@ import { translate } from "./i18n.configuration";
 
 YupSettings.setLocale({
   mixed: {
-    required: "WIP",
+    required: translate("common.required"),
     default: "WIP",
   },
   string: {

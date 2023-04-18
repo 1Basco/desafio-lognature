@@ -6,6 +6,10 @@ import { useTasks } from "../../../app/contexts/tasks/use-tasks.hook";
 import { ToastProvider } from "../../../app/providers/toast.provider";
 import { StorageProvider } from "../../../app/providers/storage.provider";
 import { StorageConstants } from "../../../app/constants/storage.constants";
+import {
+  translate,
+  translateReplace,
+} from "../../../configuration/i18n.configuration";
 
 function useTaskController() {
   const toastProvider: ToastProvider = ToastProvider.Instance;
@@ -30,7 +34,13 @@ function useTaskController() {
         if (taskData) {
           setTask(taskData);
         } else {
-          toastProvider.error(`Task with id ${taskId} not found`);
+          toastProvider.error(
+            translateReplace(
+              "common.task_with_id_value_was_not_found",
+              ":value:",
+              taskId
+            )
+          );
           handleNavigation();
         }
         setTask(taskData);
@@ -52,7 +62,7 @@ function useTaskController() {
         };
         try {
           await updateTask(taskUpdated);
-          toastProvider.success("Task updated successfully");
+          toastProvider.success(translate("common.task_updated_successfully"));
         } catch (error: any) {
           toastProvider.error(error.message);
         } finally {

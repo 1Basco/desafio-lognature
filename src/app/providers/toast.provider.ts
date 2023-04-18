@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { translate } from "../../configuration/i18n.configuration";
 
 export class ToastProvider {
   private static _instance: ToastProvider;
@@ -8,14 +9,14 @@ export class ToastProvider {
   }
 
   public success = (message?: string) => {
-    toast.success(message ?? "Success WIP");
+    toast.success(message ?? translate("common.success"));
   };
 
   public error = (message?: string) => {
-    toast.error(message ?? "Error WIP");
+    toast.error(message ?? translate("common.error"));
   };
 
   public warning = (message?: string) => {
-    toast.warning(message ?? "Cuidado WIP");
+    toast.warning(message ?? translate("common.warning"));
   };
 }

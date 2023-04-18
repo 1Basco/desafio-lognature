@@ -14,6 +14,7 @@ import { TaskStatusConstants } from "../../../../app/constants/task-status.const
 import { TaskYupFormSchema } from "./schema.yup";
 import { TaskFormOptions, TaskFormValues } from "./types";
 import { RouteConstants } from "../../../../app/constants/route.constants";
+import { translate } from "../../../../configuration/i18n.configuration";
 
 export const TaskForm = ({ task, onClick }: TaskFormOptions) => {
   const navigate = useNavigate();
@@ -67,31 +68,39 @@ export const TaskForm = ({ task, onClick }: TaskFormOptions) => {
     <Card className="p-3">
       <form onSubmit={formik.handleSubmit}>
         <FormControl mb={4} isInvalid={!!formik.errors.title}>
-          <FormLabel htmlFor="title">Title</FormLabel>
+          <FormLabel htmlFor="title">{translate("heading.title")}</FormLabel>
           <Input
             id="title"
-            placeholder="Task title"
+            placeholder={translate("common.task_title")}
             {...formik.getFieldProps("title")}
           />
           <FormErrorMessage>{formik.errors.title}</FormErrorMessage>
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!formik.errors.description}>
-          <FormLabel htmlFor="description">Description</FormLabel>
+          <FormLabel htmlFor="description">
+            {translate("heading.description")}
+          </FormLabel>
           <Textarea
             id="description"
-            placeholder="Task description"
+            placeholder={translate("common.task_description")}
             {...formik.getFieldProps("description")}
           />
           <FormErrorMessage>{formik.errors.description}</FormErrorMessage>
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!formik.errors.status}>
-          <FormLabel htmlFor="status">Status</FormLabel>
+          <FormLabel htmlFor="status">{translate("heading.status")}</FormLabel>
           <Select id="status" {...formik.getFieldProps("status")}>
-            <option value={TaskStatusConstants.PENDING}>Pending</option>
-            <option value={TaskStatusConstants.IN_PROGRESS}>In Progress</option>
-            <option value={TaskStatusConstants.COMPLETED}>Finished</option>
+            <option value={TaskStatusConstants.PENDING}>
+              {translate("heading.to_do")}
+            </option>
+            <option value={TaskStatusConstants.IN_PROGRESS}>
+              {translate("heading.in_progress")}
+            </option>
+            <option value={TaskStatusConstants.COMPLETED}>
+              {translate("heading.finished")}
+            </option>
           </Select>
           <FormErrorMessage>{formik.errors.status}</FormErrorMessage>
         </FormControl>
@@ -102,7 +111,9 @@ export const TaskForm = ({ task, onClick }: TaskFormOptions) => {
           type="submit"
           isLoading={formik.isSubmitting}
         >
-          {task ? "Update Task" : "Create Task"}
+          {task
+            ? translate("common.update_task")
+            : translate("common.create_task")}
         </Button>
       </form>
     </Card>
